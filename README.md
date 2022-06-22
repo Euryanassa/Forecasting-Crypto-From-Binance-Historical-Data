@@ -1,0 +1,2 @@
+# Forecasting_Crypto_From_Binance_Historical_Data
+Forecasting Project from Kaggle Binance
