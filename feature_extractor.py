@@ -6,7 +6,11 @@ class feature_extractor:
         Creates time series features from datetime index
         """
         #df['ds'] = pd.to_datetime(df['ds']).dt.date
-        df = df.set_index('ds')
+        try:
+            df = df.set_index('ds')
+        except:
+            pass
+        
         df['date'] = pd.to_datetime(df.index, errors='coerce')
 
         
