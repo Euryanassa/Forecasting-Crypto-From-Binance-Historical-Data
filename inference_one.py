@@ -1,7 +1,9 @@
 from pycaret.regression import load_model, predict_model
+from preprocessor import preprocessing
 from feature_extractor import feature_extractor
 import numpy as np
 import pandas as pd
+import argparse
 
 
 def forecastor(df, model, forecast_range_min = 10, num_of_lag = 10):
@@ -15,7 +17,7 @@ def forecastor(df, model, forecast_range_min = 10, num_of_lag = 10):
     # Dates and Forecasts to be appended
     try:
         print(f'[\033[96mLOG\033[0m]Loading Model {model}')
-        model = load_model(model)
+        model = load_model(model[:-4])
         print(f'[\033[92mSUCCESS\033[0m]Model Loaded Successfully')
     except:
         print(f'[\033[91mERROR\033[0m]Model Couldn\'t be Obtained Properly')
@@ -97,3 +99,27 @@ def forecastor(df, model, forecast_range_min = 10, num_of_lag = 10):
         print(f'[\033[91mERROR\033[0m]Couldn\'t Create Foreacasting Dataframe!')
     
     return df_return
+
+def parse_opt():
+    parser = argparse.ArgumentParser()
+    # df, model, forecast_range_min = 10, num_of_lag = 10
+    parser.add_argument('--df', help = 'Path to your parquet file from binance dataset')
+    parser.add_argument('--model', help = 'Path to your model')
+    parser.add_argument('--forecast_range_min', default = 10, help = 'Minimum minute to be forecasted')
+    parser.add_argument('--num_of_lag', default = 10, help = 'lag range which you trained on your model')
+    opt = parser.parse_args()
+    return opt
+
+def main(df, model, forecast_range_min, num_of_lag):
+    df = preprocessing.df_pp(df, freq = 'T')
+    df = feature_extractor.create_features(df) 
+    df = feature_extractor.series_lagger(df[['y']], full_data = df, n_in = 10, n_out=1, dropnan=True)
+    
+    df_out = forecastor(df, model, int(forecast_range_min), int(num_of_lag))
+
+    print(df_out)
+
+
+if __name__ == '__main__':
+    opt = parse_opt()
+    main(**vars(opt))
