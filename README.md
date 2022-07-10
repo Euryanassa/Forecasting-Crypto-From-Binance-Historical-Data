@@ -68,4 +68,4 @@ dtypes: datetime64[ns](1), float32(8), uint16(1)
 <p>This data is being collected automatically from crypto exchange Binance.</p></div></div></div><div class="mdc-drawer-scrim"></div></div></div></div></div>
 
 🥏 Kaggle Dataset Link: https://www.kaggle.com/datasets/jorijnsmit/binance-full-history
-## You can check tutorial from repository.
+## You can check tutorial from BigDataProject.ipynb.
