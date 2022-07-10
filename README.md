@@ -1,5 +1,5 @@
 # This Project is Forecastor Project Which PreProcess all Historical Binance Dataset and Create Forecast Models with 25 Algorithm
-## BTC-EUR Forecast Table. Forecast vs Real
+## BTC-EUR Forecast Table Forecast vs Real
 ![image](https://user-images.githubusercontent.com/67932543/178141561-eb893385-9b13-4073-bd15-2347a1cce0a7.png)
 
 # Example Inference
