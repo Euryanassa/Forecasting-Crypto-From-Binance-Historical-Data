@@ -6,15 +6,6 @@ class preprocessing:
         try:
             print(f'[\033[96mLOG\033[0m]Data {path} Reading')
             df = pq.read_table(source=path).to_pandas()
-            ########################################################
-            ########################################################
-            # DIKKAT DIKKAT DIKKAT
-
-            df = df.iloc[-500:]
-
-            # DIKKAT DIKKAT DIKKAT
-            ########################################################
-            ########################################################
             print(f'[\033[92mSUCCESS\033[0m]Data Read Successfully')
         except:
             print(f'[\033[91mERROR\033[0m]Data Can Not Read {path} Successfully')
